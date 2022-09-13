@@ -1,0 +1,66 @@
+# My custom aliases
+
+alias df='df -h'
+
+alias ls='ls --color -h' ### Colorize the ls output
+alias la='ls --color -lAh'
+alias ll='ls --color -lh' ### Use a long listing format
+alias l.='ls --color -ldh .\*' ### Show hidden files
+
+### get rid of command not found
+
+alias cd..='cd ..'
+
+## a quick way to get out of current directory
+
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
+
+## grep
+
+## Colorize the grep command output for ease of use (good for log files)##
+
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# Create parent directories on demand
+
+alias mkdir='mkdir -pv'
+
+# install colordiff package :)
+
+alias diff='colordiff'
+
+# Make mount command output pretty and human readable format
+
+alias mount='mount |column -t'
+
+# Create a new set of commands
+
+alias path='echo -e ${PATH//:/\\n}'
+alias now='date +"%T"'
+alias nowtime=now
+alias nowdate='date +"%d-%m-%Y"'
+
+alias vi=vim
+
+# Show open ports
+
+alias ports='netstat -tulanp'
+
+alias myip='curl http://ipecho.net/plain; echo'
+
+alias distro='cat /etc/\*-release'
+
+alias reload='source ~/.zshrc'
+alias configzsh='code $HOME/.zshrc'
+alias zshconfig='code $HOME/.zshrc'
+alias configzsh_aliases='sudo apt update -y && sudo apt upgrade -y'
+
+# Used with the ~/dotfiles git bare repository to store and track all gotfiles
+alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
