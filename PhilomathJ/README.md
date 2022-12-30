@@ -1,1 +1,1 @@
-# This repo is for al dotfiles for PhilomathJ
+# This repo is for dotfiles for PhilomathJ
