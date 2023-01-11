@@ -64,4 +64,4 @@ alias configzsh_aliases='sudo apt update -y && sudo apt upgrade -y'
 
 # Used with the ~/dotfiles git bare repository to store and track all gotfiles
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias dtcfg='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
