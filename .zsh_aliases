@@ -47,6 +47,10 @@ alias now='date +"%T"'
 alias nowtime=now
 alias nowdate='date +"%d-%m-%Y"'
 
+# Add logout command
+
+alias lo='qdbus org.kde.ksmserver /KSMServer logout 0 3 3'
+
 alias vi=vim
 
 # Show open ports
