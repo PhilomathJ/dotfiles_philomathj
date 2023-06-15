@@ -20,6 +20,12 @@ alias .....='cd ../../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
 
+## combine mkdir & cd ##
+mkcd () {
+  mkdir "$1"
+  cd "$1"
+}
+
 ## grep
 
 ## Colorize the grep command output for ease of use (good for log files)##
