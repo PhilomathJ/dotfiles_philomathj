@@ -8,6 +8,7 @@ All my dotfiles for Debian machines for [Oh My Z!sh](https://ohmyz.sh/)
 
 
 ## Install Bash Script
+```
 #!/usr/bin/env bash
 
 DOTFILESDIR="$HOME/.dotfiles"
