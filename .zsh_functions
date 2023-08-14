@@ -5,6 +5,7 @@ mkcd () {
 }
 
 function largest () {
+    echo "Listing the largest files/dirs in order..."
     du -h -x -s -- * | sort -r -h | head -20;
 }
 
