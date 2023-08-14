@@ -48,10 +48,17 @@ DOTFILES_FUNCTIONS_FILE="$DOTFILESDIR/dotfiles_functions"
 DTF_FUNCTION="function dtf() { \n/usr/bin/git --git-dir=$DOTFILESDIR --work-tree=$HOME \"\$@\" \n}"
 # Write function to functions file
 echo -e $DTF_FUNCTION > $DOTFILES_FUNCTIONS_FILE
+
 # Append to ~/.zshrc if does not already exist
-if ! grep -q "function dtf()" "$HOME/.zshrc"; then
-  echo -e "\n# Create 'dtf' function for working with dotfiles instead of git \nsource $DOTFILES_FUNCTIONS_FILE" >> $HOME/.zshrc;
-  source $DOTFILES_FUNCTIONS_FILE;
+echo "FINDME" >> $HOME/.zshrc
+if [ grep -q "function dtf()" "$HOME/.zshrc" ]; then
+  echo "zsh should already have function";
+else
+  echo "333" >> $HOME/.zshrca
+  echo "343" >> $HOME/.zshrc
+  echo -e "\n# Create 'dtf' function for working with dotfiles instead of git \nsource $DOTFILES_FUNCTIONS_FILE" >> "$HOME/.zshrc"
+  source $DOTFILES_FUNCTIONS_FILE
+  echo "Added the 'dtf' function to $HOME/.zshrc"
 fi
 echo "Created 'dtf' function to use instead of 'git' for working with dotfiles only"
 
@@ -65,9 +72,6 @@ else
   dtf checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} $DOTFILESBACKUPDIR{}
 fi
 
-#dotfiles checkout
-
 # Be sure to only show the dotfiles
-#dotfiles config status.showUntrackedFiles no
-
+dtf config --local status.showUntrackedFiles no
 ```
