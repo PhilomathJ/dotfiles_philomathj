@@ -54,8 +54,6 @@ echo "FINDME" >> $HOME/.zshrc
 if [ grep -q "function dtf()" "$HOME/.zshrc" ]; then
   echo "zsh should already have function";
 else
-  echo "333" >> $HOME/.zshrca
-  echo "343" >> $HOME/.zshrc
   echo -e "\n# Create 'dtf' function for working with dotfiles instead of git \nsource $DOTFILES_FUNCTIONS_FILE" >> "$HOME/.zshrc"
   source $DOTFILES_FUNCTIONS_FILE
   echo "Added the 'dtf' function to $HOME/.zshrc"
