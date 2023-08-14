@@ -72,10 +72,6 @@ alias configzsh='code $HOME/.zshrc'
 alias zshconfig='code $HOME/.zshrc'
 alias configzsh_aliases='sudo apt update -y && sudo apt upgrade -y'
 
-# Used with the ~/dotfiles git bare repository to store and track all gotfiles
-
-alias dtcfg='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-
 alias logout='kill -9 -1'
 
 alias kernel=hostnamectl
