@@ -5,7 +5,7 @@ alias df='df -h'
 alias ls='ls --color -h' ### Colorize the ls output
 alias la='ls --color -lAh'
 alias ll='ls --color -lh' ### Use a long listing format
-alias l.='ls --color -ldh .\*' ### Show hidden files
+alias l.='ls --color -a | grep "^\."' ### Show only hidden files
 
 ### get rid of command not found
 
