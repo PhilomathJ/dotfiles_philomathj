@@ -109,13 +109,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Use the  custom alias file ~/.zsh_aliases for all custom aliases
-#if [ -a ~/.zsh_aliases ]; then
-    source $HOME/.zsh_aliases
-#else
-#    print "404: ~/.zsh_aliases not found"
-#fi
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -146,3 +139,38 @@ source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # To add syntax highlighting to the command prompt, this MUST be the last line of .zshrc
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Use the  custom alias file ~/.zsh_aliases for all custom aliases
+ALIASES_FILE=$HOME/.zsh_aliases
+if test -f "$ALIASES_FILE"; then
+    # Use the  custom alias file ~/.zsh_aliases for all custom aliases
+    source $ALIASES_FILE
+    echo "Using $ALIASES_FILE"
+else
+    echo "404: $ALIASES_FILE does not exist"
+fi
+
+# Use the  custom alias file ~/.zsh_aliases for all custom aliases
+FUNCTIONS_FILE=$HOME/.zsh_functions
+if test -f "$FUNCTIONS_FILE"; then
+    source $FUNCTIONS_FILE
+    echo "Using $FUNCTIONS_FILE"
+else
+   echo "404: $FUNCTIONS_FILE does not exist"
+fi
+
+# SSH Agent should be running, once
+runcount=$(ps -ef | grep "ssh-agent" | grep -v "grep" | wc -l)
+if [ $runcount -eq 0 ]; then
+    echo Starting ssh-agent
+    eval $(ssh-agent -s)
+fi
+
+# Github
+GITHUB_KEY_PRIVATE_KEY=$HOME/.ssh/id_rsa_github
+if test -f "$GITHUB_KEY_PRIVATE_KEY"; then
+    ssh-add ~/.ssh/id_rsa_github
+    echo "Github private key added to ssh-agent"
+else
+    echo "Github private key missing"
+fi
