@@ -174,3 +174,9 @@ if test -f "$GITHUB_KEY_PRIVATE_KEY"; then
 else
     echo "Github private key missing"
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+# if [ -f '/home/jeremy/google-cloud-sdk/path.zsh.inc' ]; then . '/home/jeremy/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+# if [ -f '/home/jeremy/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/jeremy/google-cloud-sdk/completion.zsh.inc'; fi
