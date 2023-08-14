@@ -60,7 +60,6 @@ alias lo='qdbus org.kde.ksmserver /KSMServer logout 0 3 3'
 alias vi=vim
 
 # Show open ports
-
 alias ports='netstat -tulanp'
 
 alias myip='curl http://ipecho.net/plain; echo'
@@ -75,3 +74,27 @@ alias configzsh_aliases='sudo apt update -y && sudo apt upgrade -y'
 # Used with the ~/dotfiles git bare repository to store and track all gotfiles
 
 alias dtcfg='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+
+alias logout='kill -9 -1'
+
+alias kernel=hostnamectl
+
+# Edit with Nano
+alias zshrc='nano $HOME/.zshrc'
+alias aliases='nano $HOME/.zsh_aliases'
+
+# Edit with Kate
+alias kzshrc='kate $HOME/.zshrc'
+alias kaliases='kate $HOME/.zsh_aliases'
+alias kfunctions = 'kate $HOME/.zsh_functions'
+
+# Used with the ~/dotfiles git bare repository to store and track all gotfiles
+alias dtf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# CPU frequency info
+alias freq='echo \">> CPU Freq:\" $(($(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq)/1000))MHz'
+alias freqminmax='lscpu | grep -i mhz'
+
+alias logout='kill -9 -1'
+
+alias kernel=hostnamectl
