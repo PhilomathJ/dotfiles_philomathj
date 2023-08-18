@@ -2,6 +2,7 @@
 
 alias df='df -h'
 
+# alias ls='exa -al --color=always --group-directories-first'
 alias ls='ls --color -h' ### Colorize the ls output
 alias la='ls --color -lAh'
 alias ll='ls --color -lh' ### Use a long listing format
