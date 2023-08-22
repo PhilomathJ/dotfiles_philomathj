@@ -2,12 +2,14 @@
 
 alias df='df -h'
 
-# alias ls='exa -al --color=always --group-directories-first'
-alias ls='ls --color -h' ### Colorize the ls output
-alias la='ls --color -lAh'
-alias ll='ls --color -lh' ### Use a long listing format
-alias ld='LC_COLLATE=C ls -la | grep '^d'' ### Show only directories, hidden first
-alias l.='ls --color -a | grep "^\."' ### Show only hidden files
+alias ls='exa -l --color=always --group-directories-first'
+# alias ls='ls --color -h' ### Colorize the ls output
+alias la='ls -al'
+alias ll='ls' ### Use a long listing format
+# alias ld='LC_COLLATE=C ls -la | grep '^d'' ### Show only directories, hidden first
+alias ld='tree -d' ### Show only directories, hidden first
+# alias l.='ls --color -a | grep "^\."' ### Show only hidden files
+alias l.='ls -D' ### Show only hidden files
 
 ### get rid of command not found
 
