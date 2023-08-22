@@ -117,15 +117,15 @@ shareApps="$HOME/.local/share/applications"
 snapApps="/var/lib/snapd/desktop/applications"
 
 # Detect all installed applications by snap
-for file in $snapApps/*.desktop
-do
-  # Get a not-ugly version of the .desktop
-  # Example: todoist_todoist.desktop -> todoist.desktop
-  link="$shareApps/$(echo $file | cut -d '_' -f2)"
+# for file in $snapApps/*.desktop
+# do
+#   # Get a not-ugly version of the .desktop
+#   # Example: todoist_todoist.desktop -> todoist.desktop
+#   link="$shareApps/$(echo $file | cut -d '_' -f2)"
 
-  # Create new link if none exists
-  [[ -f $link ]] || ln -s $file $link
-done
+#   # Create new link if none exists
+#   [[ -f $link ]] || ln -s $file $link
+# done
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
