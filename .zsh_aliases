@@ -86,10 +86,13 @@ alias aliases='nano $HOME/.zsh_aliases'
 # Edit with Kate
 alias kzshrc='kate $HOME/.zshrc'
 alias kaliases='kate $HOME/.zsh_aliases'
-alias kfunctions = 'kate $HOME/.zsh_functions'
+alias kfunctions='kate $HOME/.zsh_functions'
 
 # Used with the ~/dotfiles git bare repository to store and track all gotfiles
 alias dtf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# Show key press information
+alias show-kp='xev -event keyboard'
 
 # CPU frequency info
 alias freq='echo \">> CPU Freq:\" $(($(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq)/1000))MHz'
