@@ -281,46 +281,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
-    -- Layout manipulation
-    -- awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
-    --           {description = "swap with next client by index", group = "client"}),
-    -- awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
-    --           {description = "swap with previous client by index", group = "client"}),
-    -- {{{ Change Focus }}}
-    awful.key({ modkey, "Control" }, "Left", function() awful.client.focus.bydirection("left") end,
-              {description = "focus left", group = "client"}),
-    awful.key({ modkey, "Control" }, "Right", function() awful.client.focus.bydirection("right") end,
-              {description = "focus right", group = "client"}),
-    awful.key({ modkey, "Control" }, "Up", function() awful.client.focus.bydirection("up") end,
-             {description = "focus up", group = "client"}),
-    awful.key({ modkey, "Control" }, "Down", function() awful.client.focus.bydirection("down") end,
-        { description = "focus down", group = "client" }),
 
-    -- {{{ Shift(Swap) Client }}}
-    awful.key({ modkey, "Shift", "Control" }, "Left",
-        function()
-            awful.client.swap.global_bydirection("left")
-            -- c:raise()
-        end,
-        { description = "shift client left", group = "client" }),
-    awful.key({ modkey, "Shift", "Control" }, "Right",
-        function()
-            awful.client.swap.global_bydirection("right")
-            -- c:raise()
-        end,
-        { description = "shift client right", group = "client" }),
-    awful.key({ modkey, "Shift", "Control" }, "Up",
-        function()
-            awful.client.swap.global_bydirection("up")
-            -- c:raise()
-        end,
-        { description = "shift client up", group = "client" }),
-    awful.key({ modkey, "Shift", "Control" }, "Down",
-        function()
-            awful.client.swap.global_bydirection("down")
-            -- c:raise()
-        end,
-        { description = "shift client down", group = "client" }),
 
     -- {{{ Screen }}}
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
@@ -376,6 +337,17 @@ globalkeys = gears.table.join(
     -- screen shot
     awful.key({ }, KEY.prtsc, function () awful.util.spawn("ksnapshot") end,
     { description = "take screen shot", group = "screen" }),
+    -- }}}
+
+    -- {{{ Rofi keybindings
+    awful.key({  "Mod1" }, "Tab",
+              function()
+                  awful.util.spawn("rofi -show window")
+              end),
+    awful.key({}, "F2",
+              function()
+                  awful.util.spawn("rofi -show drun")
+              end),
     -- }}}
 
     awful.key({ modkey, "Shift" }, "n",
@@ -452,43 +424,82 @@ clientkeys = gears.table.join(
         end ,
         { description = "(un)maximize horizontally", group = "client" }),
 
-    -- {{{ Resize Clients }}}
-    awful.key({ modkey, modalt, "Control"  }, "Left",
-        function (c)
-            if c.floating then
-            c:relative_move( 0, 0, -10, 0)
-        else
-            awful.tag.incmwfact(-0.025)
-        end
-        end ,
-        {description = "resize client (horizontal)", group = "client"}),
-    awful.key({ modkey, modalt, "Control"  }, "Right",
-        function (c)
-            if c.floating then
-            c:relative_move( 0, 0,  10, 0)
-        else
-            awful.tag.incmwfact(0.025)
-        end
-        end ,
-        {description = "resize client (horizontal)", group = "client"}),
-    awful.key({ modkey, modalt, "Control"  }, "Up",
-        function (c)
-            if c.floating then
-            c:relative_move( 0, 0, 0, -10)
-        else
-            awful.client.incwfact(0.025)
-        end
-        end ,
-        {description = "resize client (horizontal)", group = "client"}),
-    awful.key({ modkey, modalt, "Control"  }, "Down",
-        function (c)
-            if c.floating then
-            c:relative_move( 0, 0, 0,  10)
-        else
-            awful.client.incwfact(-0.025)
-        end
-        end ,
-        {description = "resize client (horizontal)", group = "client"})
+    -- {{{ Change Client Focus
+    awful.key({ modkey, "Control" }, "Left", function() awful.client.focus.bydirection("left") end,
+              {description = "focus left", group = "client"}),
+    awful.key({ modkey, "Control" }, "Right", function() awful.client.focus.bydirection("right") end,
+              {description = "focus right", group = "client"}),
+    awful.key({ modkey, "Control" }, "Up", function() awful.client.focus.bydirection("up") end,
+             {description = "focus up", group = "client"}),
+    awful.key({ modkey, "Control" }, "Down", function() awful.client.focus.bydirection("down") end,
+        { description = "focus down", group = "client" }),
+    -- }}}
+
+    -- {{{ Shift(Swap) Client
+    awful.key({ modkey, modalt, "Control" }, "Left",
+        function()
+            awful.client.swap.global_bydirection("left")
+            -- c:raise()
+        end,
+        { description = "shift client left", group = "client" }),
+    awful.key({ modkey, modalt, "Control" }, "Right",
+        function()
+            awful.client.swap.global_bydirection("right")
+            -- c:raise()
+        end,
+        { description = "shift client right", group = "client" }),
+    awful.key({ modkey, modalt, "Control" }, "Up",
+        function()
+            awful.client.swap.global_bydirection("up")
+            -- c:raise()
+        end,
+        { description = "shift client up", group = "client" }),
+    awful.key({ modkey, modalt, "Control" }, "Down",
+        function()
+            awful.client.swap.global_bydirection("down")
+            -- c:raise()
+        end,
+        { description = "shift client down", group = "client" })
+    -- }}}
+
+    -- {{{ Resize Clients
+    -- awful.key({ modkey, "Shift", "Control"  }, "Left",
+    --     function (c)
+    --     --     if c.floating then
+    --     --     c:relative_move( 0, 0, -10, 0)
+    --     -- else
+    --         awful.client.incwfact(-0.025)
+    --     -- end
+    --     end ,
+    --     {description = "resize client", group = "client"}),
+    -- awful.key({ modkey, "Shift", "Control"  }, "Right",
+    --     function (c)
+    --     --     if c.floating then
+    --     --     c:relative_move( 0, 0,  10, 0)
+    --     -- else
+    --         awful.client.incwfact(0.025)
+    --     -- end
+    --     end ,
+    --     {description = "resize client", group = "client"}),
+    -- awful.key({ modkey, "Shift", "Control"  }, "Up",
+    --     function (c)
+    --     --     if c.floating then
+    --     --     c:relative_move( 0, 0, 0, -10)
+    --     -- else
+    --         awful.client.incwfact(0.025)
+    --     -- end
+    --     end ,
+    --     {description = "resize client", group = "client"}),
+    -- awful.key({ modkey, "Shift", "Control"  }, "Down",
+    --     function (c)
+    --     --     if c.floating then
+    --     --     c:relative_move( 0, 0, 0,  10)
+    --     -- else
+    --         awful.client.incwfact(-0.025)
+    --     -- end
+    --     end ,
+    --     {description = "resize client", group = "client"})
+    -- }}}
 )
 
 -- Bind all key numbers to tags.
