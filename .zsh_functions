@@ -12,3 +12,77 @@ function largest () {
 function hg() {
     history | grep "$1";
 }
+
+function awe() {
+    # Acceptable arguments
+    local acceptable_options=(mine first kosorin orig)
+
+    local dir_main=$HOME/.config/awesome
+    local dir_orig=$HOME/.config/awesome-orig
+    local dir_kosorin=$HOME/.config/awesome-kosorin
+    local dir_riced=$HOME/.config/awesome-riced
+    local dir_riced_first=$HOME/.config/awesome-riced-first
+
+    local keyfile="$HOME/.config/awesome/repo-key"
+    local rice_key="awesome-riced"
+
+    if [ -z "$1" ]; then
+        echo "Argument required. (status ${acceptable_options[@]})"
+        return 0
+    fi
+
+    # Check for existence of repo-key file
+    if ! [ -f $keyfile ]; then
+        print "Unable to determine repo-key. File $dir_main/$keyfile missing"
+        print "Exiting"
+        return 1
+    fi
+
+    case $1 in
+        "status")
+            print "Current active AwesomeWM repo is:"
+            cat $dir_main/repo-key
+            ;;
+        "mine")
+            # Overwrite the awesome dir with my own
+            rsync -av --delete $dir_riced/ $dir_main
+            print "AwesomeWM is now mine"
+            ;;
+        "first")
+            # If active Awesome is riced, back it up
+            if grep $rice_key "$keyfile"; then
+                rsync -av --delete $dir_main/ $dir_riced
+                print "Backed up $dir_main to $dir_riced"
+            fi
+            # Overwrite the awesome dir with kosorin's original riced
+            rsync -av --delete $dir_riced_first/ $dir_main
+            print "AwesomeWM is now riced-first"
+            ;;
+        "kosorin")
+            # If active Awesome is riced, back it up
+            if grep $rice_key "$keyfile"; then
+                rsync -av --delete $dir_main/ $dir_riced
+                print "Backed up $dir_main to $dir_riced"
+            fi
+            # Overwrite the awesome dir with kosorin's original riced
+            rsync -av --delete $dir_kosorin/ $dir_main
+            print "AwesomeWM is now kosorin"
+            ;;
+        "orig")
+           # If active Awesome is riced, back it up
+            if grep $rice_key "$keyfile"; then
+                rsync -av --delete $dir_main/ $dir_riced
+                print "Backed up $dir_main to $dir_riced"
+            fi
+            # Overwrite the awesome dir with the AwesomeWM original code
+            rsync -av --delete $dir_orig/ $dir_main
+            print "AwesomeWM is now orig"
+            ;;
+        *)
+            print "Unknown argument: $1"
+            print "Exiting"
+            return 1
+            ;;
+    esac
+}
+

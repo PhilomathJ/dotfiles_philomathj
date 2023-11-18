@@ -7,7 +7,7 @@ alias ls='exa -l --color=always --group-directories-first'
 alias la='ls -al'
 alias ll='ls' ### Use a long listing format
 # alias ld='LC_COLLATE=C ls -la | grep '^d'' ### Show only directories, hidden first
-alias ld='tree -d' ### Show only directories, hidden first
+alias ld='tree -d -L 1' ### Show only directories, hidden first
 # alias l.='ls --color -a | grep "^\."' ### Show only hidden files
 alias l.='ls -D' ### Show only hidden files
 
@@ -66,7 +66,8 @@ alias vi=vim
 # Show open ports
 alias ports='netstat -tulanp'
 
-alias myip='curl http://ipecho.net/plain; echo'
+alias mypubip='curl http://ipecho.net/plain; echo'
+alias myip='nmcli -p device show ens33 | grep --color=never -Po "^IP4.ADDRESS.*|^IP4.GATEWAY.*|^IP4.DNS.*|^IP4.DOMAIN.*"'
 
 alias distro='cat /etc/\*-release'
 
@@ -93,6 +94,8 @@ alias dtf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Show key press information
 alias show-kp='xev -event keyboard'
+alias show-mouse='xes -event mouse'
+alias show-button='xev -event button | grep button'
 
 # CPU frequency info
 alias freq='echo \">> CPU Freq:\" $(($(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq)/1000))MHz'
@@ -100,4 +103,4 @@ alias freqminmax='lscpu | grep -i mhz'
 
 alias logout='kill -9 -1'
 
-alias kernel=hostnamectl
+alias kernel='hostnamectl'

@@ -180,3 +180,6 @@ fi
 
 # The next line enables shell command completion for gcloud.
 # if [ -f '/home/jeremy/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/jeremy/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Create 'dtf' function for working with dotfiles instead of git 
+source /home/jeremy/.dotfiles/dotfiles_functions
