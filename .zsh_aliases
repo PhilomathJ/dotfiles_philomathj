@@ -104,3 +104,5 @@ alias freqminmax='lscpu | grep -i mhz'
 alias logout='kill -9 -1'
 
 alias kernel='hostnamectl'
+
+alias econ='code /home/jeremy/.config/sysconfig.code-workspace'
