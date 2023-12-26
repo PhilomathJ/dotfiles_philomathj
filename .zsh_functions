@@ -86,3 +86,13 @@ function awe() {
     esac
 }
 
+# Create a Timeshift backup of the system including a comment
+function tsbackup() {
+    if [ -z "$1" ]; then
+        echo "Argument required. (comment)"
+        return 0
+    fi
+
+    comment="$1"
+    sudo timeshift --create --comments "$comment"
+}
