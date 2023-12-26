@@ -183,3 +183,6 @@ fi
 
 # Create 'dtf' function for working with dotfiles instead of git 
 source /home/jeremy/.dotfiles/dotfiles_functions
+
+# Set mouse scroll direction to natural
+xinput set-prop 10 "libinput Natural Scrolling Enabled" 1
