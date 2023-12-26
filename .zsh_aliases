@@ -5,7 +5,7 @@ alias df='df -h'
 alias ls='exa  --color=always --group-directories-first'
 # alias ls='ls --color -h' ### Colorize the ls output
 alias la='ls -al'
-alias ll='ls' ### Use a long listing format
+alias ll='ls -l' ### Use a long listing format
 # alias ld='LC_COLLATE=C ls -la | grep '^d'' ### Show only directories, hidden first
 alias ld='tree -d -L 1' ### Show only directories, hidden first
 # alias l.='ls --color -a | grep "^\."' ### Show only hidden files
