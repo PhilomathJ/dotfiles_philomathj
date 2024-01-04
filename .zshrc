@@ -185,4 +185,4 @@ fi
 source /home/jeremy/.dotfiles/dotfiles_functions
 
 # Set mouse scroll direction to natural
-xinput set-prop 10 "libinput Natural Scrolling Enabled" 1
+xinput set-prop 10 "libinput Natural Scrolling Enabled" 1 2>/dev/null
