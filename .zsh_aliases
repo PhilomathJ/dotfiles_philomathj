@@ -107,3 +107,5 @@ alias kernel='hostnamectl'
 
 alias econ='code /home/jeremy/.config/sysconfig.code-workspace'
 alias listdevices='sudo libinput list-devices'
+alias showgpu='lspci -k | grep -EA3 'VGA|3D''
+alias showdisplaymanager='echo $XDG_SESSION_TYPE'
