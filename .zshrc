@@ -160,20 +160,20 @@ else
 fi
 
 # SSH Agent should be running, once
-runcount=$(ps -ef | grep "ssh-agent" | grep -v "grep" | wc -l)
-if [ $runcount -eq 0 ]; then
-    echo Starting ssh-agent
-    eval $(ssh-agent -s)
-fi
+#runcount=$(ps -ef | grep "ssh-agent" | grep -v "grep" | wc -l)
+#if [ $runcount -eq 0 ]; then
+#    echo Starting ssh-agent
+#    eval $(ssh-agent -s)
+#fi
 
 # Github
-GITHUB_KEY_PRIVATE_KEY=$HOME/.ssh/id_rsa_github
-if test -f "$GITHUB_KEY_PRIVATE_KEY"; then
-    ssh-add ~/.ssh/id_rsa_github
-    echo "Github private key added to ssh-agent"
-else
-    echo "Github private key missing"
-fi
+#GITHUB_KEY_PRIVATE_KEY=$HOME/.ssh/id_philomath_github
+#if test -f "$GITHUB_KEY_PRIVATE_KEY"; then
+#    ssh-add $GITHUB_PRIVATE_KEY
+#    echo "Github private key added to ssh-agent"
+#else
+#    echo "Github private key missing"
+#fi
 
 # The next line updates PATH for the Google Cloud SDK.
 # if [ -f '/home/jeremy/google-cloud-sdk/path.zsh.inc' ]; then . '/home/jeremy/google-cloud-sdk/path.zsh.inc'; fi
@@ -184,5 +184,5 @@ fi
 # Create 'dtf' function for working with dotfiles instead of git 
 source /home/jeremy/.dotfiles/dotfiles_functions
 
-# Set mouse scroll direction to natural
-xinput set-prop 10 "libinput Natural Scrolling Enabled" 1 2>/dev/null
+echo "Setting mouse scroll to natural"
+xinput set-prop 10 "libinput Natural Scrolling Enabled" 1
