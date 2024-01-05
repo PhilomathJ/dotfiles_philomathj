@@ -160,11 +160,16 @@ else
 fi
 
 # SSH Agent should be running, once
-runcount=$(ps -ef | grep "ssh-agent" | grep -v "grep" | wc -l)
-if [ $runcount -eq 0 ]; then
-    echo Starting ssh-agent
-    eval $(ssh-agent -s)
-fi
+#runcount=$(ps -ef | grep "ssh-agent" | grep -v "grep" | wc -l)
+#echo "ssh-agent runcount: $runcount"
+#if [ $runcount -eq 0 ]; then
+#    echo Starting ssh-agent
+#    eval $(ssh-agent -s)
+#fi
+
+# Use keychain to manage ssh-agent
+SSH_PATH=$HOME/.ssh
+eval $(keychain --eval --quiet --confhost $SSH_PATH/id_philomath $SSH_PATH/id_philomath_github)
 
 # Github ssh key
 GITHUB_KEY_PRIVATE_KEY=$HOME/.ssh/id_philomath_github
