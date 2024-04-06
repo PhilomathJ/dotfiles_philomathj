@@ -88,19 +88,17 @@ alias kzshrc='kate $HOME/.zshrc'
 alias kaliases='kate $HOME/.zsh_aliases'
 alias kfunctions='kate $HOME/.zsh_functions'
 
-# Used with the ~/dotfiles git bare repository to store and track all gotfiles
+# Used with the ~/dotfiles git bare repository to store and track all dotfiles
 alias dtf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Show key press information
 alias show-kp='xev -event keyboard'
-alias show-mouse='xes -event mouse'
+alias show-mouse='xev -event mouse'
 alias show-button='xev -event button | grep button'
 
 # CPU frequency info
 alias freq='echo \">> CPU Freq:\" $(($(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq)/1000))MHz'
 alias freqminmax='lscpu | grep -i mhz'
-
-alias logout='kill -9 -1'
 
 alias kernel='hostnamectl'
 
@@ -108,3 +106,9 @@ alias econ='code /home/jeremy/.config/sysconfig.code-workspace'
 alias listdevices='sudo libinput list-devices'
 alias showgpu='lspci -k | grep -EA3 "VGA|3D"'
 alias showdisplaymanager='echo $XDG_SESSION_TYPE'
+
+# Set mouse wheel to natural scroll direction
+alias setscroll='xinput set-prop 10 "libinput Natural Scrolling Enabled" 1'
+
+# Fix displays to default donfig
+alias fixdisplay='$HOME/.screenlayout/default.sh'
