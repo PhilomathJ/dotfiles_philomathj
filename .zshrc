@@ -191,3 +191,5 @@ source /home/jeremy/.dotfiles/dotfiles_functions
 
 echo "Setting mouse scroll to natural"
 xinput set-prop 10 "libinput Natural Scrolling Enabled" 1
+
+eval $(thefuck --alias)
