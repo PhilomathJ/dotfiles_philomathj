@@ -1,0 +1,26 @@
+# Set directory for zinit and plugins: XDG_DATA_HOME || HOME
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Download Zinit if it is not already  done so
+if [ ! -d "$ZINIT_HOME" ]; then
+	mkdir -p "$(dirname $ZINIT_HOME)"
+	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Add PowerLevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+# Load completions
+autoload -Uz compinit && compinit
+
+# Add zsh plugins
+zinit light Aloxaf/fzf-tab
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+
+# Load completions
+#autoload -Uz compinit && compinit

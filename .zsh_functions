@@ -4,6 +4,20 @@ mkcd () {
   cd "$1"
 }
 
+## Return the xinput ID of the given mouse name ##
+mouse-id() {
+	if [ -z $1 ]; then
+		echo "Mouse name required"
+		return 0
+	fi
+
+	local mouse_name=$1
+	local id_string=$(xinput list | grep "$mouse_name.*pointer" | grep -o "id=.*")
+	local id=$(expr substr $id_string 4 2)
+	echo $id
+	return 0
+}
+
 function largest () {
     echo "Listing the largest files/dirs in order..."
     du -h -x -s -- * | sort -r -h | head -20;

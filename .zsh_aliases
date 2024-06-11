@@ -107,8 +107,11 @@ alias listdevices='sudo libinput list-devices'
 alias showgpu='lspci -k | grep -EA3 "VGA|3D"'
 alias showdisplaymanager='echo $XDG_SESSION_TYPE'
 
+alias window-class='xprop'
+
 # Set mouse wheel to natural scroll direction
-alias setscroll='xinput set-prop 10 "libinput Natural Scrolling Enabled" 1'
+#alias setscroll='xinput set-prop 15 "libinput Natural Scrolling Enabled" 1'
+alias setscroll='xinput set-prop $(mouse-id "MX Master") "libinput Natural Scrolling Enabled" 1'
 
 # Fix displays to default donfig
 alias fixdisplay='$HOME/.screenlayout/default.sh'
