@@ -60,7 +60,7 @@ SAVEHIST=$HISTSIZE
 HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
-setopt hist_ignore_space	# do not save to history if leading space
+setopt hist_ignore_space	# do not save to history if leading space. Used to run commands without being tracked in history
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
@@ -93,7 +93,7 @@ else
    echo "404: $FUNCTIONS_FILE does not exist"
 fi
 
-# SSH Agent should be running, once
+# SSH Agent should be running, ONCE and only ONCE
 #runcount=$(ps -ef | grep "ssh-agent" | grep -v "grep" | wc -l)
 #echo "ssh-agent runcount: $runcount"
 #if [ $runcount -eq 0 ]; then
