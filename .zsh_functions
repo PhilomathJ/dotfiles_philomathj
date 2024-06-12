@@ -27,6 +27,7 @@ function hg() {
     history | grep "$1";
 }
 
+# Used to switch active AwesomeWM instance to different configs for active dev only
 function awe() {
     # Acceptable arguments
     local acceptable_options=(mine first kosorin orig)
