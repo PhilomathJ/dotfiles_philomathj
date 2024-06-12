@@ -1,10 +1,12 @@
 # dotfiles
-All my dotfiles for Debian machines for [Oh My Z!sh](https://ohmyz.sh/)
+All my dotfiles for ~~Debian~~ Manjaro-based machines
+
+I use a Git [bare repo](https://www.geeksforgeeks.org/bare-repositories-in-git/) for managing all my dotfiles. The script here goes through all the steps (which can also be done manually) for pulling down these dotfiules to a new system
 
 ## Reference
 
 - Site with full instructions: [dev.to](https://dev.to/bowmanjd/store-home-directory-config-files-dotfiles-in-git-using-bash-zsh-or-powershell-the-bare-repo-approach-35l3)
-- [<img src="https://styles.redditmedia.com/t5_iaosk/styles/communityIcon_jwyv6sinaha41.jpg?width=256&s=15f9d40444aaa70b8d65a0aad2f0dd87ef58d0de" width="48" height="48">](https://www.youtube.com/watch?v=tBoLDpTWVOM&t=21s) DistroTube YouTube on setting this up: [DistroTube]
+- [<img src="https://styles.redditmedia.com/t5_iaosk/styles/communityIcon_jwyv6sinaha41.jpg?width=256&s=15f9d40444aaa70b8d65a0aad2f0dd87ef58d0de" width="48" height="48">](https://www.youtube.com/@DistroTube) DistroTube YouTube on setting this up: [DistroTube](https://www.youtube.com/watch?v=tBoLDpTWVOM&t=21s)
 
 
 ## Install Bash Script
