@@ -2,6 +2,10 @@ live_config_reload = true
 
 colors.draw_bold_text_with_bright_colors = true
 
+[shell]
+program = "/bin/zsh"
+args = ["-l"]
+
 [colors.bright]
 black = "#0d0f11"
 blue = "#3daee9"
