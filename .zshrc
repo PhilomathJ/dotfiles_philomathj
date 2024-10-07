@@ -1,3 +1,5 @@
+echo "Using ~/.zshrc"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,18 +7,16 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-echo "Running ~/.zshrc"
-
-# Set directory for zinit and plugins: XDG_DATA_HOME || HOME
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-
-# Start the Zinit package manager
-source "$HOME/.zsh_zinit"
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 source $ZSH/oh-my-zsh.sh
+
+# Start the zinit package manager
+source "$HOME/.zsh_zinit"
+
+#ZSH_THEME="powerlevel10k/powerlevel10k"
+
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -103,10 +103,10 @@ fi
 
 # Use keychain to manage ssh-agent
 SSH_PATH=$HOME/.ssh
-eval $(keychain --eval --quiet --confhost $SSH_PATH/id_philomath $SSH_PATH/id_philomath_github)
+eval $(keychain --eval --quiet --confhost $SSH_PATH/id_ed25519)
 
 # Github ssh key
-GITHUB_KEY_PRIVATE_KEY=$HOME/.ssh/id_philomath_github
+GITHUB_KEY_PRIVATE_KEY=$HOME/.ssh/id_ed25519
 if test -f "$GITHUB_KEY_PRIVATE_KEY"; then
     ssh-add $GITHUB_PRIVATE_KEY
 #    echo "Github private key added to ssh-agent"
@@ -120,7 +120,7 @@ fi
 # The next line enables shell command completion for gcloud.
 # if [ -f '/home/jeremy/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/jeremy/google-cloud-sdk/completion.zsh.inc'; fi
 
-# Create 'dtf' function for working with dotfiles instead of git 
+# Create 'dtf' function for working with dotfiles instead of git
 source /home/jeremy/.dotfiles/dotfiles_functions
 
 echo "Setting mouse scroll to natural"
