@@ -72,6 +72,9 @@ else
   dtf checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} $DOTFILESBACKUPDIR{}
 fi
 
+# Install dependencies for functions/aliases now installed
+sudo pacman -S tree
+
 # Be sure to only show the dotfiles
 dtf config --local status.showUntrackedFiles no
 ```
