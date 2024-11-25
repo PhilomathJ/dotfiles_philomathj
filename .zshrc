@@ -1,5 +1,14 @@
 echo "Using ~/.zshrc"
 
+# Set up some font colors
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
+MAGENTA="\e[35m"
+CYAN="\e[36m"
+NORMAL="\e[0m"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -124,7 +133,7 @@ fi
 source /home/jeremy/.dotfiles/dotfiles_functions
 
 echo "Setting mouse scroll to natural"
-MOUSE_ID=$(xinput list --name-only | grep 'Logitech MX Master')
+MOUSE_ID=$(xinput list --name-only | grep 'Logitech MX Master 2S')
 echo "Logitech MX Master 2S id in .zshrc: $MOUSE_ID"
 xinput set-prop "$MOUSE_ID" "libinput Natural Scrolling Enabled" 1
 
