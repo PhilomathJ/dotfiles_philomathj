@@ -91,6 +91,9 @@ alias kfunctions='kate $HOME/.zsh_functions'
 # Used with the ~/dotfiles git bare repository to store and track all dotfiles
 alias dtf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+# Show system info for debugging issues
+alias sysinfo='inxi --admin --verbosity=7 --filter --no-host --width'
+
 # Show key press information
 alias show-kp='xev -event keyboard'
 alias show-mouse='xev -event mouse'
