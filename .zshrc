@@ -133,7 +133,15 @@ fi
 source /home/jeremy/.dotfiles/dotfiles_functions
 
 echo "Setting mouse scroll to natural"
-MOUSE_ID=$(xinput list --name-only | grep 'Logitech MX Master 2S')
+MOUSE_NAME="Logitech MX Master 2S"
+
+# 1. List all input devices
+# 2. Filter to the mouse name identified above
+# 3. Filter to only of type pointer (instead of keyboard)
+# 4. Use regex to extract just the numeric id (after "...id=" and before the next "[")
+# 5. Use xargs to remove any leading/trailing whitespace
+MOUSE_ID=$(xinput list | grep $MOUSE_NAME | grep 'pointer' | sed -e 's/.*id=//;s/\[.*//' | xargs)
+
 echo "Logitech MX Master 2S id in .zshrc: $MOUSE_ID"
 xinput set-prop "$MOUSE_ID" "libinput Natural Scrolling Enabled" 1
 
