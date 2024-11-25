@@ -105,7 +105,7 @@ set linenumbers
 ## mouse clicks can be used to place the cursor, set the mark (with
 ## two clicks), and execute shortcuts.  The mouse will work in the
 ## X Window System, and on the console when gpm is running.
-# set mouse
+set mouse
 
 ## Switch on multiple file buffers (inserting a file will put it into
 ## a separate buffer).
@@ -310,8 +310,8 @@ include /usr/share/nano/extra/*.nanorc
 ## such as ^O for Open, ^F for Find, ^H for Help, and ^Q for Quit,
 ## then uncomment these:
 # bind ^X cut main
-# bind ^C copy main
-# bind ^V paste all
+bind ^C copy main
+bind ^V paste all
 # bind ^Q exit all
 # bind ^S savefile main
 # bind ^W writeout main
@@ -319,7 +319,7 @@ include /usr/share/nano/extra/*.nanorc
 # set multibuffer
 # bind ^H help all
 # bind ^H exit help
-# bind ^F whereis all
+bind ^F whereis all
 # bind ^G findnext all
 # bind ^B wherewas all
 # bind ^D findprevious all
