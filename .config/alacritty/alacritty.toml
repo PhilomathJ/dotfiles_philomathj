@@ -1,14 +1,14 @@
-live_config_reload = true
+general.live_config_reload = true
 
-import = [
+general.import = [
     "/home/jeremy/.config/alacritty/themes/themes/solarized_dark.toml",
 ]
 
 colors.draw_bold_text_with_bright_colors = true
 
-[shell]
-program = "/bin/zsh"
-args = ["-l"]
+# [general.shell]
+# program = "/bin/zsh"
+# args = ["-l"]
 
 [colors.bright]
 black = "#0d0f11"
