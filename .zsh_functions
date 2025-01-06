@@ -1,3 +1,6 @@
+# incorporate any dotfiles management functions
+source $HOME/.dotfiles/dotfiles_functions 2>/dev/null
+
 ## combine mkdir & cd ##
 mkcd () {
   mkdir "$1"
