@@ -1,0 +1,27 @@
+# This file is sourced in .zshrc
+
+# Set all PATH entries here
+
+# Global stuff
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin   # default Mac path
+export PATH=/usr/local/bin:$PATH
+export PATH=$HOME/bin:$PATH
+
+# Homebrew stuff
+brewprefix=/usr/local/brew
+export PATH="$brewprefix/bin:$brewprefix/sbin:$PATH"
+export MANPATH="$brewprefix/share/man:$MANPATH"
+unset brewprefix
+
+# VSCode
+export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+
+# Use Google git
+export PATH="/usr/local/git/git-google/bin:$PATH"
+export PATH="/usr/local/git/current/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jfairbanks/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jfairbanks/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jfairbanks/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jfairbanks/google-cloud-sdk/completion.zsh.inc'; fi
