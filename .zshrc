@@ -146,3 +146,6 @@ xinput set-prop "$MOUSE_ID" "libinput Natural Scrolling Enabled" 1
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export XDG_CONFIG_HOME="/home/jeremy/.config"
+
+# Remap Capslock to Control and Shift+Capslock to normal Capslock
+setxkbmap -option "caps:ctrl_shifted_capslock"
