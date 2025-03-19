@@ -18,7 +18,7 @@
 )
 
 (defsrc
-  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12       prnt scrlck pause
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12       sysrq slck pause
   grv  1    2    3    4    5    6    7    8    9    0    -    =   bspc  ins  home   pgup
   tab  q    w    e    r    t    y    u    i    o    p    [    ]   \     del  end    pgdn
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
@@ -36,7 +36,7 @@
 ;; )
 
 (deflayer base
-  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12       prnt scrlck pause
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  @mine  f12     sysrq slck pause
   grv  1    2    3    4    5    6    7    8    9    0    -    =   bspc  ins  home   pgup
   tab  q    w    e    r    t    y    u    i    o    p    [    ]   \     del  end    pgdn
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
@@ -44,10 +44,20 @@
   lctl lmet lalt           spc            ralt rmet rctl          left down rght
 )
 
+;; An alias that always switches layers back to base when the Pause key is held for 1000ms
+;; This alias should be present on ALL layers as a safety key to always be able to get back to base
+(defalias
+    gohome (tap-hold 1000 home (layer-switch base))
+)
+
+(defalias
+    mine (tap-hold 1000 f11 (layer-switch mine))
+)
+
 (deflayer mine
-  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12       prnt scrlck pause
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12       sysrq slck pause
   grv  1    2    3    4    5    6    7    8    9    0    -    =   bspc  ins  home   pgup
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]   \     del  end    pgdn
+  tab  w    q    e    r    t    y    u    i    o    p    [    ]   \     del  end    pgdn
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft          up
   lctl lmet lalt           spc            ralt rmet rctl          left down rght
