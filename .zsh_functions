@@ -114,3 +114,49 @@ function tsbackup() {
     comment="$1"
     sudo timeshift --create --comments "$comment"
 }
+
+# Rclone sync of Google Drive/Philomath folder and $HOME/GDrive
+function syncGDrive() {
+  rclone bisync \
+  "gdrive:/" "$HOME/GDrive" \
+  --compare size,modtime,checksum \
+  --modify-window 1s \
+  --create-empty-src-dirs \
+  --drive-acknowledge-abuse \
+  --drive-skip-gdocs \
+  --drive-skip-shortcuts \
+  --drive-skip-dangling-shortcuts \
+  --metadata \
+  --progress \
+  --verbose \
+  --log-file "$HOME/.config/rclone/logs/rclone-gdrive.log" \
+  --track-renames \
+  --fix-case \
+  --resilient \
+  --recover \
+  --max-lock 2m \
+  --check-access
+}
+
+# Rclone sync of Proton Drive/Philomath-sync folder and $HOME/ProtonDrive
+function syncProtonDrive() {
+  rclone bisync \
+  "proton:Philomath-sync/" "$HOME/ProtonDrive" \
+  --compare size,modtime,checksum \
+  --modify-window 1s \
+  --create-empty-src-dirs \
+  --drive-acknowledge-abuse \
+  --drive-skip-gdocs \
+  --drive-skip-shortcuts \
+  --drive-skip-dangling-shortcuts \
+  --metadata \
+  --progress \
+  --verbose \
+  --log-file "$HOME/.config/rclone/logs/rclone-proton.log" \
+  --track-renames \
+  --fix-case \
+  --resilient \
+  --recover \
+  --max-lock 2m \
+  --check-access
+}
