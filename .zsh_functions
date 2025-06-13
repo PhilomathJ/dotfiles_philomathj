@@ -1,162 +1,44 @@
-# incorporate any dotfiles management functions
-source $HOME/.dotfiles/dotfiles_functions 2>/dev/null
+# source every script file from from the $SHELL_FUNCTIONS_DIR
 
-## combine mkdir & cd ##
-mkcd () {
-  mkdir "$1"
-  cd "$1"
-}
+# This file is sourced by ~/.zshrc to load custom shell functions.
 
-## Return the xinput ID of the given mouse name ##
-mouse-id() {
-	if [ -z $1 ]; then
-		echo "Mouse name required"
-		return 0
-	fi
+# Define the directory where individual function files are stored
+SHELL_FUNCTIONS_DIR="$HOME/.shell_functions"
 
-	local mouse_name=$1
-	local id_string=$(xinput list | grep "$mouse_name.*pointer" | grep -o "id=.*")
-	local id=$(expr substr $id_string 4 2)
-	echo $id
-	return 0
-}
+# Check if the functions directory exists
+if [[ ! -d "$SHELL_FUNCTIONS_DIR" ]]; then
+    echo "    Error: Shell functions directory '$SHELL_FUNCTIONS_DIR' does not exist."
+    echo "    Please create it and place your function files inside."
 
-function largest () {
-    echo "Listing the largest files/dirs in order..."
-    du -h -x -s -- * | sort -r -h | head -20;
-}
+    # Clean up local variables before exiting the sourced script
+    unset SHELL_FUNCTIONS_DIR
 
-function hg() {
-    history | grep "$1";
-}
+    return 1
+fi
 
-# Used to switch active AwesomeWM instance to different configs for active dev only
-function awe() {
-    # Acceptable arguments
-    local acceptable_options=(mine first kosorin orig)
+echo "    Sourcing custom shell functions from '$SHELL_FUNCTIONS_DIR'..."
 
-    local dir_main=$HOME/.config/awesome
-    local dir_orig=$HOME/.config/awesome-orig
-    local dir_kosorin=$HOME/.config/awesome-kosorin
-    local dir_riced=$HOME/.config/awesome-riced
-    local dir_riced_first=$HOME/.config/awesome-riced-first
+# Find all regular files within the directory and its subdirectories and source them
+# 'find ... -print0' and 'while IFS= read -r -d $'\0'' handle filenames
+# with spaces or other special characters safely
 
-    local keyfile="$HOME/.config/awesome/repo-key"
-    local rice_key="awesome-riced"
+local func_count=0
+local func_file
 
-    if [ -z "$1" ]; then
-        echo "Argument required. (status ${acceptable_options[@]})"
-        return 0
+find "$SHELL_FUNCTIONS_DIR" -type f -print0 | while IFS= read -r -d $'\0' func_file; do
+    if [[ -r "$func_file" ]]; then # Check if the file is readable
+        source "$func_file"
+        ((func_count++))
+        # Optional: Uncomment the line below for verbose output during sourcing
+        # echo "        Sourced: $func_file"
+    else
+        echo "        Warning: Could not read function file: '$func_file'"
     fi
+done
 
-    # Check for existence of repo-key file
-    if ! [ -f $keyfile ]; then
-        print "Unable to determine repo-key. File $dir_main/$keyfile missing"
-        print "Exiting"
-        return 1
-    fi
+echo "    Loaded $func_count custom shell functions"
 
-    case $1 in
-        "status")
-            print "Current active AwesomeWM repo is:"
-            cat $dir_main/repo-key
-            ;;
-        "mine")
-            # Overwrite the awesome dir with my own
-            rsync -av --delete $dir_riced/ $dir_main
-            print "AwesomeWM is now mine"
-            ;;
-        "first")
-            # If active Awesome is riced, back it up
-            if grep $rice_key "$keyfile"; then
-                rsync -av --delete $dir_main/ $dir_riced
-                print "Backed up $dir_main to $dir_riced"
-            fi
-            # Overwrite the awesome dir with kosorin's original riced
-            rsync -av --delete $dir_riced_first/ $dir_main
-            print "AwesomeWM is now riced-first"
-            ;;
-        "kosorin")
-            # If active Awesome is riced, back it up
-            if grep $rice_key "$keyfile"; then
-                rsync -av --delete $dir_main/ $dir_riced
-                print "Backed up $dir_main to $dir_riced"
-            fi
-            # Overwrite the awesome dir with kosorin's original riced
-            rsync -av --delete $dir_kosorin/ $dir_main
-            print "AwesomeWM is now kosorin"
-            ;;
-        "orig")
-           # If active Awesome is riced, back it up
-            if grep $rice_key "$keyfile"; then
-                rsync -av --delete $dir_main/ $dir_riced
-                print "Backed up $dir_main to $dir_riced"
-            fi
-            # Overwrite the awesome dir with the AwesomeWM original code
-            rsync -av --delete $dir_orig/ $dir_main
-            print "AwesomeWM is now orig"
-            ;;
-        *)
-            print "Unknown argument: $1"
-            print "Exiting"
-            return 1
-            ;;
-    esac
-}
-
-# Create a Timeshift backup of the system including a comment
-function tsbackup() {
-    if [ -z "$1" ]; then
-        echo "Argument required. (comment)"
-        return 0
-    fi
-
-    comment="$1"
-    sudo timeshift --create --comments "$comment"
-}
-
-# Rclone sync of Google Drive/Philomath folder and $HOME/GDrive
-function syncGDrive() {
-  rclone bisync \
-  "gdrive:/" "$HOME/GDrive" \
-  --compare size,modtime,checksum \
-  --modify-window 1s \
-  --create-empty-src-dirs \
-  --drive-acknowledge-abuse \
-  --drive-skip-gdocs \
-  --drive-skip-shortcuts \
-  --drive-skip-dangling-shortcuts \
-  --metadata \
-  --progress \
-  --verbose \
-  --log-file "$HOME/.config/rclone/logs/rclone-gdrive.log" \
-  --track-renames \
-  --fix-case \
-  --resilient \
-  --recover \
-  --max-lock 2m \
-  --check-access
-}
-
-# Rclone sync of Proton Drive/Philomath-sync folder and $HOME/ProtonDrive
-function syncProtonDrive() {
-  rclone bisync \
-  "proton:Philomath-sync/" "$HOME/ProtonDrive" \
-  --compare size,modtime,checksum \
-  --modify-window 1s \
-  --create-empty-src-dirs \
-  --drive-acknowledge-abuse \
-  --drive-skip-gdocs \
-  --drive-skip-shortcuts \
-  --drive-skip-dangling-shortcuts \
-  --metadata \
-  --progress \
-  --verbose \
-  --log-file "$HOME/.config/rclone/logs/rclone-proton.log" \
-  --track-renames \
-  --fix-case \
-  --resilient \
-  --recover \
-  --max-lock 2m \
-  --check-access
-}
+# Clean up local variables
+unset SHELL_FUNCTIONS_DIR
+unset func_count
+unset func_file

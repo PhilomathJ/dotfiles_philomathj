@@ -96,8 +96,8 @@ fi
 # Use the  custom alias file ~/.zsh_aliases for all custom aliases
 FUNCTIONS_FILE=$HOME/.zsh_functions
 if test -f "$FUNCTIONS_FILE"; then
-    source $FUNCTIONS_FILE
     echo "Using $FUNCTIONS_FILE"
+    source $FUNCTIONS_FILE
 else
    echo "404: $FUNCTIONS_FILE does not exist"
 fi
@@ -112,7 +112,7 @@ fi
 
 # Use keychain to manage ssh-agent
 SSH_PATH=$HOME/.ssh
-eval $(keychain --eval --quiet --confhost $SSH_PATH/id_ed25519)
+eval $(keychain --eval --quiet $SSH_PATH/id_ed25519)
 
 # Github ssh key
 GITHUB_KEY_PRIVATE_KEY=$HOME/.ssh/id_ed25519
