@@ -83,7 +83,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 --color $realpath'
 # Fuzzy Finder shell integration
 eval "$(fzf --zsh)"
 
-# Use the  custom alias file ~/.zsh_aliases for all custom aliases
+# Use the custom alias file ~/.zsh_aliases for all custom aliases
 ALIASES_FILE=$HOME/.zsh_aliases
 if test -f "$ALIASES_FILE"; then
     # Use the  custom alias file ~/.zsh_aliases for all custom aliases
@@ -93,13 +93,22 @@ else
     echo "404: $ALIASES_FILE does not exist"
 fi
 
-# Use the  custom alias file ~/.zsh_aliases for all custom aliases
+# Use the custom alias file ~/.zsh_aliases for all custom aliases
 FUNCTIONS_FILE=$HOME/.zsh_functions
 if test -f "$FUNCTIONS_FILE"; then
     echo "Using $FUNCTIONS_FILE"
     source $FUNCTIONS_FILE
 else
    echo "404: $FUNCTIONS_FILE does not exist"
+fi
+
+# Use the custom alias file ~/.dotfiles/dotfiles_functions for all dotfile management
+DOTFILES_FILE=$HOME/.dotfiles/dotfiles_functions
+if test -f "$DOTFILES_FILE"; then
+    echo "Using $DOTFILES_FILE"
+    source $DOTFILES_FILE
+else
+    echo "404: $DOTFILES_FILE does not exist"
 fi
 
 # SSH Agent should be running, ONCE and only ONCE
@@ -149,3 +158,11 @@ export XDG_CONFIG_HOME="/home/jeremy/.config"
 
 # Remap Capslock to Control and Shift+Capslock to normal Capslock
 setxkbmap -option "caps:ctrl_shifted_capslock"
+
+# pnpm
+export PNPM_HOME="/home/jeremy/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
