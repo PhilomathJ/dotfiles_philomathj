@@ -23,6 +23,10 @@ alias .....='cd ../../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
 
+# use bat instead of cat
+
+alias cat='bat'
+
 ## combine mkdir & cd ##
 mkcd () {
   mkdir "$1"
@@ -129,3 +133,15 @@ alias tms='tmux new-session -s'
 
 
 alias screenshot='maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i'
+
+# Gemini cli
+# Gemini CLI Aliases
+local GEM_SILENT="NODE_NO_WARNINGS=1"
+alias gemini='gemini'                                # Uses your default set in CLI config
+alias gemini-3='gemini --model gemini-3-pro'         # The "PhD" researcher model
+alias gemini-3f='gemini --model gemini-3-flash'      # Fast, next-gen intelligence
+alias gemini-deep='gemini --model gemini-3-deepthink' # For the hardest logic puzzles
+alias gemini-25pro='gemini --model gemini-2.5-pro'   # Proven stability for long docs
+alias gemini-25flash='gemini --model gemini-2.5-flash' # Creative writing and brainstorming
+
+alias glab='cd ~/code/homelab && gemini

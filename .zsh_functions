@@ -7,13 +7,11 @@ SHELL_FUNCTIONS_DIR="$HOME/.shell_functions"
 
 # Check if the functions directory exists
 if [[ ! -d "$SHELL_FUNCTIONS_DIR" ]]; then
-    echo "    Error: Shell functions directory '$SHELL_FUNCTIONS_DIR' does not exist."
-    echo "    Please create it and place your function files inside."
-
-    # Clean up local variables before exiting the sourced script
-    unset SHELL_FUNCTIONS_DIR
-
-    return 1
+  echo "    Error: Shell functions directory '$SHELL_FUNCTIONS_DIR' does not exist."
+  echo "    Please create it and place your function files inside."
+  # Clean up local variables before exiting the sourced script
+  unset SHELL_FUNCTIONS_DIR
+  return 1
 fi
 
 echo "    Sourcing custom shell functions from '$SHELL_FUNCTIONS_DIR'..."
@@ -26,14 +24,14 @@ local func_count=0
 local func_file
 
 find "$SHELL_FUNCTIONS_DIR" -type f -print0 | while IFS= read -r -d $'\0' func_file; do
-    if [[ -r "$func_file" ]]; then # Check if the file is readable
-        source "$func_file"
-        ((func_count++))
-        # Optional: Uncomment the line below for verbose output during sourcing
-        # echo "        Sourced: $func_file"
-    else
-        echo "        Warning: Could not read function file: '$func_file'"
-    fi
+  if [[ -r "$func_file" ]]; then # Check if the file is readable
+    source "$func_file"
+    ((func_count++))
+    # Optional: Uncomment the line below for verbose output during sourcing
+    # echo "        Sourced: $func_file"
+  else
+    echo "        Warning: Could not read function file: '$func_file'"
+  fi
 done
 
 echo "    Loaded $func_count custom shell functions"
