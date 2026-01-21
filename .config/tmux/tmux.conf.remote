@@ -1,0 +1,106 @@
+# remap prefix from 'C-b' to 'C-a'
+# on gMac I have remapped caps lock to control
+# so I can use C-a (Caps-a) as prefix as it is very easy & convenient
+# On gMac, this is accomplished using Karabiner (https://karabiner-elements.pqrs.org/)
+# See link for details:
+# https://github.com/PhilomathJ/karabiner-config/blob/main/assets/complex_modifications/caps-lock.json
+
+# --- SHELL OPTIONS ---
+set-option -g default-shell /bin/zsh
+
+# --- SYSTEM CONFIGS ---
+# Increase tmux messages display duration from 750ms to 2s
+set -g display-time 2000
+
+# use system clipboard
+set -g set-clipboard on
+
+# --- PREFIX CONFIGS ---
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# --- UI & VISUALS ---
+# Start counting pane and window number at 1
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Enable mouse mode
+set -g mouse on
+
+# Pretty colors
+set -g default-terminal "tmux-256color"
+
+## Status bar options ##
+# change the status bar text color DIFFERENT FOR CLOUDTOP
+# set -g status-fg colour23
+# set -g status-bg colour43
+set -g status-style "fg=colour34,bg=colour58"
+
+# Clear the left-side of the status bar
+setw -g status-left ""
+
+# Set window format in status bar
+setw -g window-status-format " #I:#W"
+
+# Make current window bold in status bar
+setw -g window-status-current-format "#[bold,fg=colour40,bg=colour58] [#I:#W]"
+
+# Add the session name and clock to the right on the status bar
+setw -g status-right " #[fg=colour34]#S : %Y-%m-%d %H:%M "
+
+# clock mode
+setw -g clock-mode-colour yellow
+
+# --- KEY BINDINGS ---
+# reload config
+bind r source ~/.config/tmux/tmux.conf \; display-message "Config reloaded..."
+
+# switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# split panes using | and -
+bind | split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+# Configure F12 to toggle beterrn remote and local tmux sessions
+# Toggle local keybindings off with F12
+bind -T root F12  \
+  set prefix None \;\
+  set key-table off \;\
+  set status-style "fg=brightblack,bg=black" \;\
+  if -F '#{pane_in_mode}' 'send-keys -X cancel' \;\
+  refresh-client -S \
+
+# Toggle local keybindings back on with F12
+bind -T off F12 \
+  set -u prefix \;\
+  set -u key-table \;\
+  set -u status-style \;\
+  refresh-client -S
+
+# --- MONITORING ---
+# alerts on activity in other windows/sessions
+setw -g monitor-activity on
+set -g visual-activity on
+
+# --- PLUGINS ---
+# tmux package manager
+set -g @plugin "tmux-plugins/tpm"
+set -g @plugin "tmux-plugins/tmux-sensible"
+
+# tmux restore sessions after reboot with resurrect
+set -g @plugin "tmux-plugins/tmux-resurrect"
+
+# tmux auto-save sessions with continuum
+set -g @plugin "tmux-plugins/tmux-continuum"
+set -g @continuum-restore "on"
+set -g @continuum-save-interval "10"
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run "~/.config/tmux/plugins/tpm/tpm"
